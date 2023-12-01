@@ -13,41 +13,36 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "`order`")
-public class Order {
+@Table(name = "`rewiev`")
+public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String firstName;
+    private String text;
 
-    private String lastName;
-
-    private String number;
+    private int stars;
 
     private LocalDate date;
 
-    private int payingSum;
-
-    private int price;
-
-    private String address;
-
-    private String comments;
-
-    private boolean delivered;
+    @ManyToOne
+    @JoinColumn(
+            name = "app_user",
+            referencedColumnName = "id"
+    )
+    private AppUser appUser;
 
     @ManyToOne
     @JoinColumn(
-            name = "sushi_id",
+            name = "sushi",
             referencedColumnName = "id"
     )
     private Sushi sushi;
 
     @ManyToOne
     @JoinColumn(
-            name = "sushi_company_id",
+            name = "sushi_company",
             referencedColumnName = "id"
     )
     private SushiCompany sushiCompany;
